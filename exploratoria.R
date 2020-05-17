@@ -7,45 +7,78 @@
 ## Library
 
 library(raster)
-library(rgeos)
-library(rgdal)
-library(ggplot2)
-library(corrplot)
-library(corrgram)
-library(tidyr)
-library(dplyr)
 
-pontos <- read.csv("./data/Novas_1_May/long_lat.csv", sep = ",", dec = ".")
+
+
+pontos <- read.csv("/home/taina/Documentos/Ferns-and-lycophytes/data/Novas_1_May/long_lat.csv", sep = ",", dec = ".")
 
 # remover registros duplicados
 dups.all <- duplicated(pontos[, c('longitude', 'latitude')])
 pontos_final <- pontos[!dups.all, ]
 
-write.csv(pontos, "./data/ferns_lyco_novo_no_duplicates.csv")
+write.csv(pontos_final, "./data/Novas_1_May/samambaia_no_duplicates.csv")
 
-### Load, List, Stack 
-dados <- list.files(path = "./data/Layers/Present_1970_200_version_2.1", pattern = ".tif", full.names=TRUE)
-biovars <- stack(dados)
 
-cropp <- raster("./data/Layers/bio1.tif")
+# Inverse (Extract values from point require a file in format long lat respectively to use extract funtion)
+pontos_fim <-pontos_final[,-1]
 
-### Crop
-# Mask Crop for atlantic forest
-cropped_biovars<- crop(x = biovars, y = extent(cropp))
-plot(cropped_biovars)
-#####
+pontos_fim<- rev(pontos_fim[nrow(pontos_fim[,-1]):3,])
+
+
+alt <-raster("/home/taina/Documentos/Ferns-and-lycophytes/data/Layers/altitude_samambaia.tif")
+plot(alt)
+
+
+srtm <- raster("/home/taina/Documentos/Ferns-and-lycophytes/data/Layers/23_24_srtm_samambaia.tif")
+plot(srtm)
+
+expo <- raster("/home/taina/Documentos/Ferns-and-lycophytes/data/Layers/expo_samambaia.tif")
+plot(expo)
+
+dens_dren <- raster("/home/taina/Documentos/Ferns-and-lycophytes/data/Layers/densi_dre_samambaia.tif")
+plot(dens_dren)
+
+decl <- raster("/home/taina/Documentos/Ferns-and-lycophytes/data/Layers/declividade_samambaia.tif")
+plot(decl)
+
+hand500 <- raster("/home/taina/Documentos/Layers_aleatórios/INPE_Layers/hand_500_RJ.tif")
+plot(hand500)
 
 
 ##### Extract values from point (require a file in format long lat respectively to use extract funtion)
 
 
 # Extract values from point
-values_coord <- extract(cropped_biovars, pontos_final[,-1], method='simple', df=T)
+
+alt_values_2 <- extract(alt, pontos_final[,-1])
+boxplot(alt_values_2)
+
+dec_values <- extract(decl, pontos_fim)
+boxplot(dec_values)
+
+densi_dren <- extract(dens_dren, pontos_fim)
+boxplot(densi_dren)
+
+expos <- extract(expo, pontos_fim)
+boxplot(expos)
+
+hand <- extract(hand500, pontos_fim)
+boxplot(hand)
+
+srtmm <- extract(srtm, pontos_fim)
+boxplot(srtmm)
+
 
 ## Write a table
 
-values <-write.csv(values_coord, "./data/values_coord.csv")
+write.csv(alt_values, "./data/alt_values.csv")
+write.csv(dec_values, "./data/decli_values.csv")
+write.csv(densi_dren, "./data/densi_dren.csv")
+write.csv(expos, "./data/expos.csv")
+write.csv(hand, "./data/hand_500.csv")
+write.csv(srtmm,"./data/srtm.csv")
 
+denss <- summary(densi_dren)
 
 ###############################################################
 
