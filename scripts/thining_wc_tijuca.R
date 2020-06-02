@@ -10,7 +10,7 @@ library(modleR)
 
 ### Load points table
 
-all <- read.csv("./data/Novas_1_May/all_test.csv", sep = ",", dec = ".")
+tijuca <- read.csv("./data/Novas_1_May/tijuca.csv", sep = ",", dec = ".")
 
 #### Select Point : setup_sdmdata
 
@@ -20,16 +20,14 @@ predics <- list.files("./data/Layers/wc_layers/", pattern = ".tif", full.names =
 predic <- stack(predics)
 
 ######
-sp<- unique(all$sp)
-for (i in 1:length(sp)) {
-  sp <- sp[i]
- # occs <- all[,-1],
-  setup_sdmdata(species_name = sp,
-  occurrences = all[,-1], 
+sp <- unique(tijuca$sp)
+
+setup_sdmdata(species_name = sp,
+  occurrences = tijuca[,-1], 
   predictors = predic, 
   lon = "longitude", 
   lat = "latitude", 
-  models_dir = "./wc_thinning", 
+  models_dir = "./wc_thinning_tijuca", 
   real_absences = NULL, 
   buffer_type = NULL, 
   dist_buf = NULL, 
@@ -55,7 +53,7 @@ for (i in 1:length(sp)) {
   boot_proportion = 0.7, 
   cv_n = NULL, 
   cv_partitions = NULL)
-}
+
 
 
 #final_data_records <- thin.algorithm(Unique_Points, thin.par = 1, reps = 5)
