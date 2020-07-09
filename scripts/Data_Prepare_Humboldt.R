@@ -1,38 +1,26 @@
+## 
+
 library(raster)
+library(humboldt)
+library(tcltk)
+
+## Enviromental data
+
+envs_list <- list.files("./data/Env_Final_1/", pattern = ".tif", full.names = T)
+
+envs <-stack(envs_list)
 
 
-## Data Prepare for Humboldt analysis Tijuca
+vals_envs <- values(envs)
+
+coord_envs<-xyFromCell(envs,1:ncell(envs))
+
+combine_envs<-cbind(coord_envs,vals_envs)
+
+## remove NAs and make sure all variables are imported as numbers
+
+env1n2<-humboldt.scrub.env(combine_envs)
+
+write.table(env1n2,"envs.txt", dec = ".") 
 
 
-env_tijuca_list <- list.files("./data/layers_env_tijuca/todas/", pattern = ".tif", full.names = T)
-
-env_tijuca <-stack(env_tijuca_list)
-
-
-vals_tijuca <- values(env_tijuca)
-
-coord_tijuca <- xyFromCell(env_tijuca,1:ncell(env_tijuca))
-
-combine_tijuca <- cbind(coord_tijuca,vals_tijuca)
-
-write.csv(combine_tijuca,"env_tijuca_xyvalues.csv", sep = ",", dec = ".") 
-
-
-#############################################################################
-
-
-## Data Prepare for Humboldt analysis Pedra Bonita Gávea
-
-
-env_bgav_list <- list.files("./data/layers_env_bongav/todas/", pattern = ".tif", full.names = T)
-
-env_bgava <-stack(env_bgav_list)
-
-
-vals_bgav <- values(env_bgava)
-
-coord_bgav <- xyFromCell(env_bgava,1:ncell(env_bgava))
-
-combine_bgav <- cbind(coord_bgav,vals_bgav)
-
-write.csv(combine_bgav,"env_bgav_xyvalues.csv", sep = ",", dec = ".") 

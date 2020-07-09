@@ -14,7 +14,7 @@ library(vegan)
 SAC <- read.csv("./data/Input_CAE/Input_cae_pixels.csv", sep = ",")
 
 
-teste <- specaccum(SAC[2:238], method = "rarefaction", permutations = 100,
+teste <- specaccum(SAC[2:238], method = "coleman", permutations = 100,
           conditioned =TRUE, gamma = "jack1")
 
 
