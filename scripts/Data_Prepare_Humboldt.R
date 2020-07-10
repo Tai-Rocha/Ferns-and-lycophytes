@@ -21,6 +21,6 @@ combine_envs<-cbind(coord_envs,vals_envs)
 
 env1n2<-humboldt.scrub.env(combine_envs)
 
-write.table(env1n2,"envs.txt", dec = ".") 
+write.table(env1n2,"envs_unique.txt", dec = ".") 
 
 
