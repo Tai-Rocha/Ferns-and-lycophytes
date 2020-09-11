@@ -4,7 +4,7 @@
 ## Date: 28 May 2020
 ##############################
 
-## Librays
+## Librarys
 
 library(factoextra)
 library(FactoMineR)
