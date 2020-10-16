@@ -5,6 +5,4 @@
 #### Ps.: In progress
 #######################################################################################################
 
-
-
-We performed pairwise analysis for three areas. This is a environmental compare and we use climatic and topographic variables from INPE (http://www.dpi.inpe.br/Ambdata/download.php)
+Environmental compare using climatic and topographic variables from INPE (http://www.dpi.inpe.br/Ambdata/download.php)
