@@ -2,7 +2,6 @@
 ## PCA 
 ## Author: Tainá Rocha
 ## Date: 16 October 2020
-
 ##############################
 
 ## Librays
@@ -36,20 +35,20 @@ tiff(file="VARS_PCA.tiff",
 fviz_pca_biplot(res.pca, 
                 axes = c(1, 2), 
                 geom = c("point", "text"), 
-                geom.ind = "geom", 
+                geom.ind = "point", 
                 geom.var = c("arrow", "text"), 
                 col.ind = "black", 
-                fill.ind = "white", 
-                col.var = "steelblue", 
+                fill.ind = "gray", 
+                col.var = "gray", 
                 fill.var = "white", 
                 gradient.cols = NULL, 
                 label = "all", 
                 invisible = "none", 
                 repel = FALSE, 
-                habillage = "none", 
+                habillage = vals_pca$Setor, 
                 palette = NULL, 
                 addEllipses = FALSE, 
-                title = "Variables - PCA")
+                title = "Variables and individuals- PCA")
 dev.off()
 # Color individuals by groups
 fviz_pca_ind(res.pca, label="none", habillage=vals_pca$Setor)
