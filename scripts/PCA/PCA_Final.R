@@ -6,7 +6,7 @@
 
 ##############################
 
-## Librays
+## Libray
 
 library(factoextra)
 library(FactoMineR)
@@ -50,7 +50,7 @@ fviz_pca_biplot(res.pca,
                 habillage = vals_pca$Setor, 
                 palette = NULL, 
                 addEllipses = FALSE, 
-                title = "Variables and individuals- PCA")
+                title = "Variables and sites- PCA")
 dev.off()
 # Color individuals by groups
 fviz_pca_ind(res.pca, label="none", habillage=vals_pca$Setor)
