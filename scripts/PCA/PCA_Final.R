@@ -32,7 +32,7 @@ vals_pca <- read.csv("./data/New_PCA/PCA_INPUT.csv", sep = ",", dec = ".")
 res.pca <- prcomp(vals_pca[4:26],  scale = TRUE)
 
 
-tiff(file="VARS_PCA.tiff",
+tiff(file="PCA.tiff",
      width=9, height=7, units="in", res=150)
 fviz_pca_biplot(res.pca, 
                 axes = c(1, 2), 
