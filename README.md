@@ -5,4 +5,4 @@
 #### 
 #######################################################################################################
 
-Environmental compare using climatic and topographic variables from INPE (http://www.dpi.inpe.br/Ambdata/download.php)
+We used climatic and topographic variables from INPE (http://www.dpi.inpe.br/Ambdata/download.php)
