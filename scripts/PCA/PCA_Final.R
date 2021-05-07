@@ -19,7 +19,7 @@ library(vegan)
 
 ## Read and Load data
 
-vals_pca <- read.csv("./data/New_PCA/PCA_INPUT.csv", sep = ",", dec = ".")
+vals_pca <- read.csv("./Ferns-and-lycophytes_old/data/PCA/PCA_INPUT.csv", sep = ",", dec = ".")
 
 ### standardize unit of variables to build PCA  # 
 
@@ -29,11 +29,11 @@ vals_pca <- read.csv("./data/New_PCA/PCA_INPUT.csv", sep = ",", dec = ".")
 
 ### PCA Vegan
 
-res.pca <- prcomp(vals_pca[4:26],  scale = TRUE)
+res.pca <- prcomp(vals_pca[1:23],  scale = TRUE)
 
 
-tiff(file="PCA.tiff",
-     width=9, height=7, units="in", res=150)
+png(file="PCA.png",
+     width=9, height=7, units="in", res=300)
 fviz_pca_biplot(res.pca, 
                 axes = c(1, 2), 
                 geom = c("point", "text"), 
@@ -41,16 +41,17 @@ fviz_pca_biplot(res.pca,
                 geom.var = c("arrow", "text"), 
                 col.ind = "black", 
                 fill.ind = "gray", 
-                col.var = "gray", 
+                col.var = "dark gray", 
                 fill.var = "white", 
                 gradient.cols = NULL, 
-                label = "all", 
+                #label = "all", 
                 invisible = "none", 
                 repel = FALSE, 
                 habillage = vals_pca$Setor, 
                 palette = NULL, 
                 addEllipses = FALSE, 
-                title = "Variables and sites- PCA")
+                title = " ")
+
 dev.off()
 # Color individuals by groups
 fviz_pca_ind(res.pca, label="none", habillage=vals_pca$Setor)
